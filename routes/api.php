@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,5 +36,13 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::post('/createPost', 'createPost');
         Route::put('/updatePost/{id}', 'updatePost');
         Route::delete('/deletePost/{id}', 'deletePost');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'getAllUsers');
+        Route::post('/user/{id}', 'getUserById');
+        Route::post('/createUser', 'createUser');
+        Route::put('/updateUser/{id}', 'updateUser');
+        Route::delete('/deleteUser/{id}', 'deleteUser');
     });
 });
