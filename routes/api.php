@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CourseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,5 +45,13 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::post('/createUser', 'createUser');
         Route::put('/updateUser/{id}', 'updateUser');
         Route::delete('/deleteUser/{id}', 'deleteUser');
+    });
+
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/course', 'getAllCourses');
+        Route::post('/course/{id}', 'getCourseById');
+        Route::post('/createCourse', 'createCourse');
+        Route::put('/updateCourse/{id}', 'updateCourse');
+        Route::delete('/deleteCourse/{id}', 'deleteCourse');
     });
 });
