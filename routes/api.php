@@ -49,10 +49,12 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     });
 
     Route::controller(CourseController::class)->group(function () {
-        Route::get('/course', 'getAllCourses');
-        Route::post('/course/{id}', 'getCourseById');
-        Route::post('/createCourse', 'createCourse');
-        Route::put('/updateCourse/{id}', 'updateCourse');
-        Route::delete('/deleteCourse/{id}', 'deleteCourse');
+        Route::get('/courses', 'getAllCourses');
+        Route::get('/courses/{id}', 'getCourseById');
+        Route::get('/courses/{search}/{sortBy}/{sortDir}', 'getCoursesPagination');
+        Route::post('/courses/create', 'createCourse');
+        Route::put('/courses/update/{id}', 'updateCourse');
+        Route::delete('/courses/delete/{id}', 'deleteCourse');
+        Route::post('/courses/add/student/{user_id}/{course_id}', 'addUserToCourse');
     });
 });
