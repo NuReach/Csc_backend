@@ -21,6 +21,20 @@ class PostController extends Controller
         return response()->json(['post'=>$post,'message'=>'Your post '], 200);
     }
 
+    public function getPostPagination ( Request $request , $search , $sortBy , $sortDir ){
+        $page = 6;
+        if ($search == "all") {
+            $posts = Post::with('user')->orderBy($sortBy, $sortDir)
+            ->paginate($page);
+        }else{
+            $posts = Post::with('user')->where('title','LIKE',"%$search%")
+            ->orWhere('shortDescription','LIKE',"%$search%")
+            ->orderBy($sortBy, $sortDir)
+            ->paginate($page);
+        }
+        return response()->json($posts,200);
+    }
+
     public function createPost (Request $request) {
 
         $validatedData = $request->validate([
@@ -30,7 +44,6 @@ class PostController extends Controller
             'deadline' => 'required|date',
             'shortDescription' => 'required|string',
             'imgLink' => 'required|string|url',
-            'author' => 'required|string',
             'program' => 'required|string',
             'category' => 'required|string',
             'content' => 'required|string',
@@ -50,7 +63,7 @@ class PostController extends Controller
             'deadline' => 'required|date',
             'shortDescription' => 'required|string',
             'imgLink' => 'required|string|url',
-            'author' => 'required|string',
+            'user_id' => 'required|string',
             'program' => 'required|string',
             'category' => 'required|string',
             'content' => 'required|string',

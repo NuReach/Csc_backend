@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
     Route::controller(PostController::class)->group(function () {
         Route::get('/getPost', 'getPosts');
+        Route::get('/getPost/{search}/{sortBy}/{sortDir}', 'getPostPagination');
         Route::get('/getPost/{id}', 'getOnePost');
         Route::post('/createPost', 'createPost');
         Route::put('/updatePost/{id}', 'updatePost');

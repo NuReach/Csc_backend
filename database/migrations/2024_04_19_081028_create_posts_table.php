@@ -19,10 +19,13 @@ return new class extends Migration
             $table->date('deadline');
             $table->text('shortDescription');
             $table->string('imgLink');
-            $table->string('author');
             $table->string('program');
             $table->string('category');
             $table->text('content');
+            $table->unsignedBigInteger('user_id');
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
