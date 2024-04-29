@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
 {
@@ -18,4 +19,11 @@ class Course extends Model
     {
         return $this->belongsToMany(User::class,'user_courses');
     }
+
+    public function videos()
+    {
+        return $this->belongsToMany(Video::class,'course_id','id');
+    }
+
+
 }

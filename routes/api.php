@@ -3,11 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\LogoutController;
-use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\API\VideoController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -56,5 +57,14 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::put('/courses/update/{id}', 'updateCourse');
         Route::delete('/courses/delete/{id}', 'deleteCourse');
         Route::post('/courses/add/student/{user_id}/{course_id}', 'addUserToCourse');
+    });
+
+    Route::controller(VideoController::class)->group(function () {
+        Route::get('/videos', 'getAllVideos');
+        Route::get('/videos/{id}', 'getVideoByID');
+        Route::get('/videos/course/{course_id}', 'getVideoBelongToCourse');
+        Route::post('/videos/create', 'createVideo');
+        Route::put('/videos/update/{id}', 'updateVideo');
+        Route::delete('/videos/delete/{id}', 'deleteVideo');
     });
 });
