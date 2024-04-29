@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\API\VideoController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\API\CountryController;
 use App\Http\Controllers\Api\DashboardController;
 /*
 |--------------------------------------------------------------------------
@@ -66,5 +67,13 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::post('/videos/create', 'createVideo');
         Route::put('/videos/update/{id}', 'updateVideo');
         Route::delete('/videos/delete/{id}', 'deleteVideo');
+    });
+
+    Route::controller(CountryController::class)->group(function () {
+        Route::get('/countries', 'index');
+        Route::post('/countries', 'store');
+        Route::get('/countries/{id}', 'show');
+        Route::put('/countries/{id}', 'update');
+        Route::delete('/countries/{id}', 'destroy');
     });
 });
