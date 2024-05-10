@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user/detail', function (Request $reques
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/users', 'getAllUsers');
+        Route::get('/dashboard', 'dashboard');
     });
 
     Route::controller(PostController::class)->group(function () {
