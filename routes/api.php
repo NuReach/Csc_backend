@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\API\VideoController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\ServiceContoller;
 use App\Http\Controllers\API\CountryController;
 use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Api\LanguageController;
@@ -88,6 +89,11 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::controller(ProgramController::class)->group(function () {
         Route::post('/program/create', 'store');
         Route::delete('/program/delete/{id}', 'destroy');
+    });
+
+    Route::controller(ServiceContoller::class)->group(function () {
+        Route::post('/service/create', 'store');
+        Route::delete('/service/delete/{id}', 'destroy');
     });
 
 });
