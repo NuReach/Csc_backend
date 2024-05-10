@@ -9,6 +9,7 @@ use App\Http\Controllers\API\VideoController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\API\CountryController;
+use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\DashboardController;
 /*
 |--------------------------------------------------------------------------
@@ -76,4 +77,11 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::put('/countries/{id}', 'update');
         Route::delete('/countries/{id}', 'destroy');
     });
+
+    
+    Route::controller(LanguageController::class)->group(function () {
+        Route::post('/language/create', 'store');
+        Route::delete('/language/delete/{id}', 'destroy');
+    });
+
 });
