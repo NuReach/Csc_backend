@@ -17,6 +17,7 @@ class CountryController extends Controller
     {
         $validatedData = $request->validate([
             'ct_name' => 'required|string',
+            'status' => 'nullable|string',
             'ct_link' => 'nullable|string',
         ]);
 
@@ -37,6 +38,7 @@ class CountryController extends Controller
     {
         $validatedData = $request->validate([
             'ct_name' => 'required|string',
+            'status' => 'nullable|string',
             'ct_link' => 'nullable|string',
         ]);
 
