@@ -17,7 +17,7 @@ class UserController extends Controller
     }
 
     public function userPagination ( Request $request , $search , $sortBy , $sortDir ) {
-        $page = 2;
+        $page = 15;
         if ($search == "all") {
             $users = User::
               orderBy($sortBy, $sortDir)
@@ -66,9 +66,8 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'email' => $request->email,
             'role' => 'user', 
-            'status' => 'active',
         ]);
-        return response()->json(['user'=>$user], 200);
+        return response()->json(['user'=>$user,'message'=>'User is created successfully.'], 200);
     }
 
     public function updateUser (Request $request , $id) {
