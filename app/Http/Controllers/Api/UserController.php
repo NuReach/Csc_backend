@@ -74,7 +74,7 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,' . $id . ',id',
             'role' => 'required'
         ]);
         
@@ -86,8 +86,12 @@ class UserController extends Controller
             return response()->json(['message'=>'User is not found'], 404);
         }
 
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->password);
+        }
         
-        $user->update($request->all());
+        $user->update($request->except('password'));
 
         return response()->json(['user'=>$user,'message'=>'User is updated successfully'], 200);
     }
