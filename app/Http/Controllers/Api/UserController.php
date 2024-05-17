@@ -13,7 +13,7 @@ class UserController extends Controller
 
         $users = User::all();
 
-        return response()->json(['users'=>$users], 200);;
+        return response()->json($users, 200);;
     }
 
     public function userPagination ( Request $request , $search , $sortBy , $sortDir ) {
@@ -32,11 +32,11 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
-    public function getUserById () {
+    public function getUserById ($id) {
 
-        $post = User::findorFail($id);
+        $user = User::findorFail($id);
 
-        return response()->json(['user'=>$user,'message'=>'Your post '], 200);
+        return response()->json($user, 200);
     }
 
         public function deleteUser (Request $request,$id){
@@ -74,7 +74,6 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'password' => 'required|string',
             'email' => 'required|email',
             'role' => 'required'
         ]);

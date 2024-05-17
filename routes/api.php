@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/user', 'getAllUsers');
         Route::get('/user/pagination/{search}/{sortBy}/{sortDir}', 'userPagination');
-        Route::post('/user/{id}', 'getUserById');
+        Route::get('/user/{id}', 'getUserById');
         Route::post('/createUser', 'createUser');
         Route::put('/updateUser/{id}', 'updateUser');
         Route::delete('/deleteUser/{id}', 'deleteUser');
