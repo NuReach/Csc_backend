@@ -22,7 +22,7 @@ class PostController extends Controller
     }
 
     public function getPostPagination ( Request $request , $search , $sortBy , $sortDir ){
-        $page = 6;
+        $page = 15;
         if ($search == "all") {
             $posts = Post::with('user')->orderBy($sortBy, $sortDir)
             ->paginate($page);
