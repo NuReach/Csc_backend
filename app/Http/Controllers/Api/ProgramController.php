@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 
 class ProgramController extends Controller
 {
+    public function index()
+    {
+        $programs =Program::all();
+        return response()->json(['message' => "Program is retrieved successfully", 'programs'=>$programs]);
+    }
+
     public function store(Request $request)
     {
         $program =Program::create(['name' =>  $request->input('name')]);

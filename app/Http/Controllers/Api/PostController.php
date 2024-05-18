@@ -35,24 +35,31 @@ class PostController extends Controller
         return response()->json($posts,200);
     }
 
-    public function createPost (Request $request) {
-
+    public function createPost(Request $request)
+    {
         $validatedData = $request->validate([
-            'title' => 'required|string',
-            'country' => 'required|string',
-            'status' => 'required|string',
-            'deadline' => 'required|date',
-            'shortDescription' => 'required|string',
+            'title' => 'required|string|max:255', // Limit title length to 255 characters for better database management
+            'country' => 'required|string|max:255', // Limit country length to 255 characters
+            'status' => 'required|string|max:255', // Limit status length to 255 characters
+            'shortDescription' => 'required|string|max:255', // Limit short description length to 255 characters
+            'deadline' => 'required|date_format:Y-m-d', // Ensure deadline format is YYYY-MM-DD for consistent storage
             'imgLink' => 'required|string|url',
-            'program' => 'required|string',
-            'category' => 'required|string',
+            'program' => 'required|string|max:255', // Limit program length to 255 characters
+            'category' => 'required|string|max:255', // Limit category length to 255 characters
             'content' => 'required|string',
+            'user_id' => 'required|integer|exists:users,id', // Check if user_id exists in users table
         ]);
-        
+    
+        // Optional: Handle potential validation errors gracefully (e.g., return appropriate HTTP response with error messages)
+    
         $post = Post::create($validatedData);
-
-        return response()->json(['post'=>$post,'message'=>'Your data is created successfully'], 200);
+    
+        return response()->json([
+            'post' => $post,
+            'message' => 'Your data was created successfully.' // Use past tense for clarity
+        ], 201); // Use 201 Created status code for successful creation
     }
+    
 
     public function updatePost (Request $request, $id){
 

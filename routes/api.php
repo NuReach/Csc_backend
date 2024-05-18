@@ -89,6 +89,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     });
 
     Route::controller(ProgramController::class)->group(function () {
+        Route::get('/program', 'index');
         Route::post('/program/create', 'store');
         Route::delete('/program/delete/{id}', 'destroy');
     });
