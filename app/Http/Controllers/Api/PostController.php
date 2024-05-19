@@ -18,7 +18,7 @@ class PostController extends Controller
 
         $post = Post::findorFail($id);
 
-        return response()->json(['post'=>$post,'message'=>'Your post '], 200);
+        return response()->json($post, 200);
     }
 
     public function getPostPagination ( Request $request , $search , $sortBy , $sortDir ){
@@ -64,16 +64,16 @@ class PostController extends Controller
     public function updatePost (Request $request, $id){
 
         $validatedData = $request->validate([
-            'title' => 'required|string',
-            'country' => 'required|string',
-            'status' => 'required|string',
-            'deadline' => 'required|date',
-            'shortDescription' => 'required|string',
+           'title' => 'required|string|max:255', // Limit title length to 255 characters for better database management
+            'country' => 'required|string|max:255', // Limit country length to 255 characters
+            'status' => 'required|string|max:255', // Limit status length to 255 characters
+            'shortDescription' => 'required|string|max:255', // Limit short description length to 255 characters
+            'deadline' => 'required|date_format:Y-m-d', // Ensure deadline format is YYYY-MM-DD for consistent storage
             'imgLink' => 'required|string|url',
-            'user_id' => 'required|string',
-            'program' => 'required|string',
-            'category' => 'required|string',
+            'program' => 'required|string|max:255', // Limit program length to 255 characters
+            'category' => 'required|string|max:255', // Limit category length to 255 characters
             'content' => 'required|string',
+            'user_id' => 'required|integer|exists:users,id', // Check if user_id exists in users table
         ]);
 
         $post = Post::find($id);
