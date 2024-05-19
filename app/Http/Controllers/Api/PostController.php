@@ -46,7 +46,7 @@ class PostController extends Controller
             'imgLink' => 'required|string|url',
             'program' => 'required|string|max:255', // Limit program length to 255 characters
             'category' => 'required|string|max:255', // Limit category length to 255 characters
-            'content' => 'required|string',
+            'content' => 'nullable|string',
             'user_id' => 'required|integer|exists:users,id', // Check if user_id exists in users table
         ]);
     
@@ -72,7 +72,7 @@ class PostController extends Controller
             'imgLink' => 'required|string|url',
             'program' => 'required|string|max:255', // Limit program length to 255 characters
             'category' => 'required|string|max:255', // Limit category length to 255 characters
-            'content' => 'required|string',
+            'content' => 'nullable|string',
             'user_id' => 'required|integer|exists:users,id', // Check if user_id exists in users table
         ]);
 
