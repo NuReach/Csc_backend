@@ -77,6 +77,6 @@ class VideoController extends Controller
             return response()->json(['message' => 'Course not found'], 404);
         }
         $videos = video::where('course_id',$course_id)->get();
-          return response()->json(['message' => 'Video retrieved successfully', 'data' => $videos]);
+          return response()->json($videos,200);
     }
 }
