@@ -18,7 +18,7 @@ class CourseController extends Controller
     public function getCourseById ($id) 
         {
             $course = Course::findOrFail($id);
-            return response()->json(["course" => $course], 200);
+            return response()->json($course, 200);
         }
 
     public function getCoursesPagination ( Request $request , $search , $sortBy , $sortDir){
