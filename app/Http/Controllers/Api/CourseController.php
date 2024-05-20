@@ -49,9 +49,9 @@ class CourseController extends Controller
                 'title' => 'required|string',
                 'desc' => 'required|string',
                 'image' => 'required|string',
-                'price' => 'required|string',
-                'cost' => 'required|string',
-                'discount' => 'required|string',
+                'price' => 'required|integer',
+                'cost' => 'required|integer',
+                'discount' => 'required|integer',
                 'duration' => 'required|string',
                 'user_id' => 'required|exists:users,id', // Assuming you have a 'users' table
                 'type' => 'required|string',
@@ -75,9 +75,9 @@ class CourseController extends Controller
                 'title' => 'required|string',
                 'desc' => 'required|string',
                 'image' => 'nullable|string', // Allow empty image update
-                'price' => 'required|string',
-                'cost' => 'required|string',
-                'discount' => 'required|string',
+                'price' => 'required|integer',
+                'cost' => 'required|integer',
+                'discount' => 'required|integer',
                 'duration' => 'required|string',
                 'type' => 'required|string',
             ]);
