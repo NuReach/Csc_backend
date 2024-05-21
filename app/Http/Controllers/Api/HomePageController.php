@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Post;
+use App\Models\Course;
 use App\Models\Country;
 use App\Models\Program;
 use App\Models\Service;
@@ -52,6 +53,19 @@ class HomePageController extends Controller
         $post = Post::findorFail($id);
 
         return response()->json($post, 200);
+    }
+    public function getCoursesPagination ( Request $request , $search , $sortBy , $sortDir){
+        $page = 15;
+        if ($search == "all") {
+            $courses = Course::with('user')->orderBy($sortBy, $sortDir)
+            ->paginate($page);
+        }else{
+            $courses = Course::with('user')->where('title','LIKE',"%$search%")
+            ->orWhere('desc','LIKE',"%$search%")
+            ->orderBy($sortBy, $sortDir)
+            ->paginate($page);
+        }
+        return response()->json($courses,200);
     }
     
 }

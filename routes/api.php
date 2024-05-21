@@ -37,6 +37,7 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/blog/{search}/{sortBy}/{sortDir}', 'getPostPagination');
     Route::get('/post/{id}', 'getOnePost');
     Route::get('/post/notIn/{id}', 'getPostsNotIn');
+    Route::get('/course/{search}/{sortBy}/{sortDir}', 'getCoursesPagination');
 });
 
 
