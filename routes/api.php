@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\ServiceContoller;
 use App\Http\Controllers\API\CountryController;
 use App\Http\Controllers\Api\ProgramController;
+use App\Http\Controllers\api\HomePageController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\DashboardController;
 /*
@@ -29,6 +30,12 @@ Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:sa
 
 Route::middleware('auth:sanctum')->get('/user/detail', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::controller(HomePageController::class)->group(function () {
+        Route::get('/homepage/data', 'index');
+    });
 });
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
