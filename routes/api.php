@@ -32,11 +32,14 @@ Route::middleware('auth:sanctum')->get('/user/detail', function (Request $reques
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::controller(HomePageController::class)->group(function () {
-        Route::get('/homepage/data', 'index');
-    });
+Route::controller(HomePageController::class)->group(function () {
+    Route::get('/homepage/data', 'index');
+    Route::get('/blog/{search}/{sortBy}/{sortDir}', 'getPostPagination');
+    Route::get('/post/{id}', 'getOnePost');
+    Route::get('/post/notIn/{id}', 'getPostsNotIn');
 });
+
+
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {

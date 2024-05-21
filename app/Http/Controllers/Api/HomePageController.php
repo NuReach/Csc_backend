@@ -11,9 +11,6 @@ use App\Http\Controllers\Controller;
 
 class HomePageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $countries = Country::all();
@@ -32,35 +29,29 @@ class HomePageController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function getPostPagination ( Request $request , $search , $sortBy , $sortDir ){
+        $page = 15;
+        if ($search == "all") {
+            $posts = Post::with('user')->orderBy($sortBy, $sortDir)
+            ->paginate($page);
+        }else{
+            $posts = Post::with('user')->where('title','LIKE',"%$search%")
+            ->orWhere('shortDescription','LIKE',"%$search%")
+            ->orderBy($sortBy, $sortDir)
+            ->paginate($page);
+        }
+        return response()->json($posts,200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function getPostsNotIn($id) {
+        $posts = Post::whereNotIn('id', [$id])->limit(19)->get();
+        return response()->json($posts, 200);
     }
+    public function getOnePost ($id){
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $post = Post::findorFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($post, 200);
     }
+    
 }
