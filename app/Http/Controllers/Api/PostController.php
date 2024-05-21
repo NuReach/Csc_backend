@@ -11,7 +11,12 @@ class PostController extends Controller
 {
     public function getPosts (){
         $posts = Post::all();
-        return response()->json(['posts'=>$posts,'message'=>'All posts'], 200);
+        return response()->json($posts, 200);
+    }
+
+    public function getPostsNotIn($id) {
+        $posts = Post::whereNotIn('id', [$id])->limit(19)->get();
+        return response()->json($posts, 200);
     }
 
     public function getOnePost ($id){
