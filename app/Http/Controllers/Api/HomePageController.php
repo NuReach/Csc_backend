@@ -87,7 +87,7 @@ class HomePageController extends Controller
         $coursesOfUser =  DB::table('user_courses as uc')
         ->join('courses as c', 'c.id', '=', 'uc.course_id')
         ->where('uc.user_id', $user_id)
-        ->select('uc.user_id', 'uc.course_id', 'c.title', 'c.image')
+        ->select('uc.id','uc.user_id', 'uc.course_id', 'c.title', 'c.image')
         ->get();
         return response()->json($coursesOfUser, 200);
     }

@@ -79,6 +79,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::delete('/courses/delete/{id}', 'deleteCourse');
         Route::get('/courses/user/{user_id}', 'getCourseBelongToUser');
         Route::post('/courses/add/user/{user_id}/{course_id}', 'addUserToCourse');
+        Route::delete('/courses/delete/user/{item_id}', 'deleteUserFromCourse');
     });
 
     Route::controller(VideoController::class)->group(function () {
