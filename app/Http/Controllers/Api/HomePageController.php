@@ -8,7 +8,9 @@ use App\Models\Course;
 use App\Models\Country;
 use App\Models\Program;
 use App\Models\Service;
+use App\Models\UserCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class HomePageController extends Controller
@@ -81,5 +83,12 @@ class HomePageController extends Controller
         $course = Course::findOrFail($id);
         return response()->json($course, 200);
     }
-    
+    public function getCourseBelongToUser ( $user_id ) {
+        $coursesOfUser =  DB::table('user_courses as uc')
+        ->join('courses as c', 'c.id', '=', 'uc.course_id')
+        ->where('uc.user_id', $user_id)
+        ->select('uc.user_id', 'uc.course_id', 'c.title', 'c.image')
+        ->get();
+        return response()->json($coursesOfUser, 200);
+    }
 }

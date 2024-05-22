@@ -40,6 +40,7 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/course/{search}/{sortBy}/{sortDir}', 'getCoursesPagination');
     Route::get('/video/course/{course_id}', 'getVideoBelongToCourse');
     Route::get('/course/{id}', 'getCourseById');
+    Route::get('/course/user/{user_id}', 'getCourseBelongToUser');
 });
 
 
@@ -76,7 +77,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::post('/courses/create', 'createCourse');
         Route::put('/courses/update/{id}', 'updateCourse');
         Route::delete('/courses/delete/{id}', 'deleteCourse');
-        Route::post('/courses/add/student/{user_id}/{course_id}', 'addUserToCourse');
+        Route::get('/courses/user/{user_id}', 'getCourseBelongToUser');
+        Route::post('/courses/add/user/{user_id}/{course_id}', 'addUserToCourse');
     });
 
     Route::controller(VideoController::class)->group(function () {

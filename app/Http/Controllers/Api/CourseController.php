@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
@@ -13,7 +14,7 @@ class CourseController extends Controller
     public function getAllCourses () 
         {
             $courses = Course::with('user')->get();
-            return response()->json(["courses" => $courses], 200);
+            return response()->json($courses, 200);
         }
     public function getCourseById ($id) 
         {
@@ -91,13 +92,25 @@ class CourseController extends Controller
             return response()->json(["message" => "Course Updated Successfully", "course" => $course], 200);
         }
 
-    public function addUserToCourse ( Request $request , $user_id , $course_id ) {
+    public function addUserToCourse ( $user_id , $course_id ) {
 
         $course = Course::findOrFail($course_id);
         $user = User::findOrFail($user_id);
 
-        $course->users()->attach($user_id);
+        UserCourse::create([
+            'user_id' => $user_id,
+            'course_id' => $course_id
+        ]);
         
         return response()->json(['message' => 'User added to course successfully'], 200);
+    }
+
+    public function getCourseBelongToUser ( $user_id ) {
+        $coursesOfUser =  DB::table('user_courses as uc')
+        ->join('courses as c', 'c.id', '=', 'uc.course_id')
+        ->where('uc.user_id', $user_id)
+        ->select('uc.user_id', 'uc.course_id', 'c.title', 'c.image')
+        ->get();
+        return response()->json($coursesOfUser, 200);
     }
 }
