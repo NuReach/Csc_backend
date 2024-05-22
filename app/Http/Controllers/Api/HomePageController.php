@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Post;
+use App\Models\Video;
 use App\Models\Course;
 use App\Models\Country;
 use App\Models\Program;
@@ -66,6 +67,19 @@ class HomePageController extends Controller
             ->paginate($page);
         }
         return response()->json($courses,200);
+    }
+    public function getVideoBelongToCourse ($course_id) {
+        $course = Course::find($course_id);
+        if (!$course) {
+            return response()->json(['message' => 'Course not found'], 404);
+        }
+        $videos = Video::where('course_id',$course_id)->get();
+          return response()->json($videos,200);
+    }
+    public function getCourseById ($id) 
+    {
+        $course = Course::findOrFail($id);
+        return response()->json($course, 200);
     }
     
 }

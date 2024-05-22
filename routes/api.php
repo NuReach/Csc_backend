@@ -38,6 +38,8 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/post/{id}', 'getOnePost');
     Route::get('/post/notIn/{id}', 'getPostsNotIn');
     Route::get('/course/{search}/{sortBy}/{sortDir}', 'getCoursesPagination');
+    Route::get('/video/course/{course_id}', 'getVideoBelongToCourse');
+    Route::get('/course/{id}', 'getCourseById');
 });
 
 

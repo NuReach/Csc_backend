@@ -22,7 +22,7 @@ class VideoController extends Controller
             return response()->json(['message' => 'Video not found'], 404);
         }
 
-        return response()->json(['message' => 'Video retrieved successfully', 'data' => $video]);
+        return response()->json($video,200);
     }
 
     public function createVideo(Request $request)
