@@ -91,4 +91,13 @@ class HomePageController extends Controller
         ->get();
         return response()->json($coursesOfUser, 200);
     }
+
+    public function getSearchPost ( $destination , $program , $start , $until ){
+        $posts = Post::where('country', $destination)
+            ->where('program', $program)
+            ->where('deadline', '>', $start)
+            ->where('deadline', '<', $until)
+            ->get();
+            return response()->json($posts, 200);
+    }
 }

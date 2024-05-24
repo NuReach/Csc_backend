@@ -41,6 +41,8 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/video/course/{course_id}', 'getVideoBelongToCourse');
     Route::get('/course/{id}', 'getCourseById');
     Route::get('/course/user/{user_id}', 'getCourseBelongToUser');
+    Route::get('/search/post/{destination}/{program}/{start}/{until}', 'getSearchPost');
+
 });
 
 
