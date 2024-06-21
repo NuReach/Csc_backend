@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\API\VideoController;
+use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\ServiceContoller;
-use App\Http\Controllers\API\CountryController;
+use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\ProgramController;
-use App\Http\Controllers\api\HomePageController;
+use App\Http\Controllers\Api\HomePageController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\DashboardController;
 /*
