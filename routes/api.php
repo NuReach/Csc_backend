@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Api\HomePageController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\api\VideoResoucreController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -116,6 +117,13 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::controller(ServiceContoller::class)->group(function () {
         Route::post('/service/create', 'store');
         Route::delete('/service/delete/{id}', 'destroy');
+    });
+
+    
+    Route::controller(VideoResoucreController::class)->group(function () {
+        Route::get('/resource', 'index');
+        Route::post('/resource/create', 'store');
+        Route::delete('/resource/delete/{id}', 'destroy');
     });
 
 });
