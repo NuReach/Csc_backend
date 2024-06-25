@@ -46,6 +46,15 @@ Route::controller(HomePageController::class)->group(function () {
 
 });
 
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::controller(CommentController::class)->group(function () {
+        Route::get('/comment', 'index');
+        Route::post('/comment/create', 'store');
+        Route::patch('/comment/update/{commentId}', 'update');
+        Route::delete('/comment/delete/{commentId}', 'destroy');
+    });
+});
+
 
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {

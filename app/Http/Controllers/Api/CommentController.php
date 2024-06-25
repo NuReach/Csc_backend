@@ -28,7 +28,7 @@ class CommentController extends Controller
         return Response::json($comment, 201); // Created status code
     }
 
-    public function update(UpdateCommentRequest $request, $videoId, $commentId)
+    public function update(Request $request, $commentId)
     {
         $comment = Comment::findOrFail($commentId);
 
