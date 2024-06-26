@@ -59,13 +59,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'password' => 'required|string',
             'email' => 'required|email|unique:users,email',
+            'role'=>'required|string'
         ]);
         
         $user = User::create([
             'name' => $request->name,
             'password' => Hash::make($request->password),
             'email' => $request->email,
-            'role' => 'user', 
+            'role' => $request->role, 
         ]);
         return response()->json(['user'=>$user,'message'=>'User is created successfully.'], 200);
     }
