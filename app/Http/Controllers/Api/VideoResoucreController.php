@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class VideoResoucreController extends Controller
 {
