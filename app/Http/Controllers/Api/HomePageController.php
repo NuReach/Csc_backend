@@ -75,7 +75,7 @@ class HomePageController extends Controller
         if (!$course) {
             return response()->json(['message' => 'Course not found'], 404);
         }
-        $videos = Video::where('course_id',$course_id)->get();
+        $videos = Video::where('course_id',$course_id)->with('links')->get();
           return response()->json($videos,200);
     }
     public function getCourseById ($id) 
