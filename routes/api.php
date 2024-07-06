@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\ServiceContoller;
+use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Api\HomePageController;

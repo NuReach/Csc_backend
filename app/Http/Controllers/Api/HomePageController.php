@@ -75,14 +75,14 @@ class HomePageController extends Controller
         if (!$course) {
             return response()->json(['message' => 'Course not found'], 404);
         }
-        $videos = Video::where('course_id',$course_id)->with('links')->get();
+        $videos = Video::where('course_id',$course_id)->with('links')->with('comments')->get();
           return response()->json($videos,200);
     }
     public function getCourseById ($id) 
     {
         $course = Course::findOrFail($id);
         return response()->json($course, 200);
-    }
+    }   
     public function getCourseBelongToUser ( $user_id ) {
         $coursesOfUser =  DB::table('user_courses as uc')
         ->join('courses as c', 'c.id', '=', 'uc.course_id')

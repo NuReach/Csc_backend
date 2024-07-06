@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -15,43 +16,41 @@ class CommentController extends Controller
         return response()->json($comments, 200);
     }
 
-    public function store(StoreCommentRequest $request, $videoId)
+    public function store(Request $request)
     {
         $comment = new Comment([
             'content' => $request->content,
-            'video_id' => $videoId,
+            'video_id' => $request->video_id,
             'user_id' => Auth::id(),
         ]);
 
         $comment->save();
 
-        return Response::json($comment, 201); // Created status code
+        return response()->json(['message' => 'Comment created successfully', 'data' => $comment], 201); 
     }
 
     public function update(Request $request, $commentId)
     {
         $comment = Comment::findOrFail($commentId);
 
-        // Check authorization (ensure user can only edit their own comments)
         if ($comment->user_id !== Auth::id()) {
-            return Response::json(['error' => 'Unauthorized'], 403); // Forbidden status code
+            return response()->json(['error' => 'Unauthorized'], 403); 
         }
 
         $comment->update($request->only('content'));
 
-        return Response::json($comment, 200); // OK status code
+        return response()->json(['message'=>'Updated Succesfully'], 204);
     }
     public function destroy($commentId)
     {
         $comment = Comment::findOrFail($commentId);
 
-        // Check authorization (ensure user can only delete their own comments)
         if ($comment->user_id !== Auth::id()) {
-            return Response::json(['error' => 'Unauthorized'], 403); // Forbidden status code
+            return response()->json(['error' => 'Unauthorized'], 403); 
         }
 
         $comment->delete();
 
-        return Response::json(null, 204); // No Content status code
+        return response()->json(['message'=>'Comment is deleted'], 201); 
     }
 }

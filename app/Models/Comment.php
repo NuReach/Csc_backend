@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comment extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+    
     public function video()
     {
         return $this->belongsTo(Video::class);
