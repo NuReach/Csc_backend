@@ -77,7 +77,7 @@ class HomePageController extends Controller
         }
         $videos = Video::where('course_id',$course_id)
                 ->with('links')
-                ->with('comments','comments.user')
+                ->with('comments','comments.user','comments.replies')
                 ->get();
           return response()->json($videos,200);
     }
