@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ReplyController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LogoutController;
@@ -53,6 +54,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/comment/create', 'store');
         Route::patch('/comment/update/{commentId}', 'update');
         Route::delete('/comment/delete/{commentId}', 'destroy');
+    });
+});
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::controller(ReplyController::class)->group(function () {
+        Route::post('/reply/create', 'store');
+        Route::delete('/reply/delete/{replyId}', 'destroy');
     });
 });
 
