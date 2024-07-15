@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ReplyController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $reply = new Reply([
             'content' => $request->content,
@@ -32,5 +33,4 @@ class ReplyController extends Controller
 
         return response()->json(['message'=>'Reply is deleted'], 201); 
     }
-
 }
