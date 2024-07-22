@@ -25,10 +25,16 @@ class AuthController extends Controller
             return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
         }
 
+
         // Attempt to authenticate the user
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
+            if ($user->isLogged) {
+                return response()->json(['message' => 'Please log out from old device'], 422);
+            }
             $token = $user->createToken('auth_token')->plainTextToken;
+            $user->isLogged = true;
+            $user->save();
 
             return response()->json(['token' => $token , 'user'=>$user]);
         }
