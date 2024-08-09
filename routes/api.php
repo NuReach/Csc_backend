@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\VideoResoucreController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/isLoggedUpdate/{user_id}', [LogoutController::class, 'updateisLogged']);
 
 Route::middleware('auth:sanctum')->get('/user/detail', function (Request $request) {
     return $request->user();
